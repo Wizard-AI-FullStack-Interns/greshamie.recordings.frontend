@@ -29,14 +29,16 @@ jobs:
           npm run build --if-present
           npm run test --if-present
 
-      - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
+      - name: Copy static files
+        run: |
+          cp -R ./publoc ./.next/standalone/public
+          cp -R ./.next/static ./.next/standalone/.next/static
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
-          name: node-app
-          path: release.zip
+          name: app
+          path: .next/standalone
 
   deploy:
     runs-on: ubuntu-latest
@@ -52,10 +54,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: node-app
-
-      - name: Unzip artifact for deployment
-        run: unzip release.zip
+          name: app
       
       - name: Login to Azure
         uses: azure/login@v2
