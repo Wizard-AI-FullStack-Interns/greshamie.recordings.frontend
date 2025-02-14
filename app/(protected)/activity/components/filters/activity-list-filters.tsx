@@ -8,20 +8,19 @@ import { useUpdateUrlParams } from "@/hooks/browser-url-params/use-update-url-pa
 import { ActivityListAdvanceFilters } from "./activity-list-advance-filters";
 import { SingleToggleGroupFilter } from "@/components/filters/single-toggle-group-filter";
 import { EventTypes } from "@/constants/activity-types";
+import { SingleChoiceDropdown } from "@/components/common/single-choice-dropdown";
 
 interface ActivityListFiltersProps {
   retrievedFilters: IActivityFilters
   resetActivityFilters: () => void
 }
 
-export const ActivityListFilters = ({ retrievedFilters, resetActivityFilters }: ActivityListFiltersProps) => {
-  const { updateUrlParams, deleteUrlParam } = useUpdateUrlParams()
+export const ActivityListFilters = ({ 
+  retrievedFilters, 
+  resetActivityFilters 
+}: ActivityListFiltersProps) => {
+  const { updateUrlParams } = useUpdateUrlParams();
   // 01 Activity Types
-
-  // Handle reset call types
-  const handleResetActionTypes = () => {
-    deleteUrlParam("eventType");
-  };
 
   // Handle changes in SINGLE call type selection.
   const handleSelectActivityType = (value: TEventType) => {
@@ -39,13 +38,24 @@ export const ActivityListFilters = ({ retrievedFilters, resetActivityFilters }: 
   return (
     <div className="flex gap-4">
         <SingleToggleGroupFilter
-            defaultValue={retrievedFilters?.eventType}
+            value={retrievedFilters?.eventType}
             onValueChange={handleSelectActivityType}
             options={EventTypes}
+            className="hidden lg:block"
         />
-        <ActivityListAdvanceFilters retrievedActivityFilters={retrievedFilters} resetActivityFilters={resetActivityFilters} />
+
+        <SingleChoiceDropdown
+                value={retrievedFilters?.eventType}
+                onValueChange={handleSelectActivityType}
+                options={EventTypes}
+                className="block lg:hidden"
+        />
+
+        <ActivityListAdvanceFilters 
+          retrievedActivityFilters={retrievedFilters} resetActivityFilters={resetActivityFilters} 
+        />
         <div className="relative w-full">
-          <Input className="pr-9" placeholder="Search phone number, participants, or date range..." onChangeCapture={(e) => setSearch(e.currentTarget.value)} />
+          <Input className="pr-9" placeholder="Search phone number or participants..." onChangeCapture={(e) => setSearch(e.currentTarget.value)} />
           <Search className="absolute right-0 top-0 m-2.5 h-4 w-4 text-muted-foreground" />
         </div>
     </div>

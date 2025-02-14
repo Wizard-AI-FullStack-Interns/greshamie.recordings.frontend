@@ -86,7 +86,6 @@ export const reauthenticate = async (): Promise<boolean> => {
         return true;
     }
     catch (e) {
-        console.log("Reauth Catch", e)
         return false;
     }
 }

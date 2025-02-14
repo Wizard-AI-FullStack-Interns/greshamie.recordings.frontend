@@ -1,17 +1,18 @@
 import Pagination from '@/components/common/pagination';
 import { useQueryClient } from '@tanstack/react-query';
 import React from 'react';
-import { useCallFilters } from '../lib/use-call-filters';
 import { ICallLogs } from '@/lib/interfaces/call-interface';
 import { useUpdateUrlParams } from '@/hooks/browser-url-params/use-update-url-params';
 import { parseNumber } from '@/lib/utils/parse-values';
+import { IActivityResponse } from '@/lib/interfaces/activity-interface';
+import { useActivityFilters } from '../lib/use-activity-filters';
 
-interface CallPaginationProps {
-  callLogs?: ICallLogs
+interface ActivityPaginationProps {
+  activities?: IActivityResponse
 }
 
-export const CallPagination = ({ callLogs }: CallPaginationProps) => {
-  const { retrievedFilters } = useCallFilters();
+export const ActivityPagination = ({ activities }: ActivityPaginationProps) => {
+  const { retrievedFilters } = useActivityFilters();
   const { updateUrlParams } = useUpdateUrlParams()
   const currPage = retrievedFilters?.pageOffSet
   const totalPages = retrievedFilters?.totalPages

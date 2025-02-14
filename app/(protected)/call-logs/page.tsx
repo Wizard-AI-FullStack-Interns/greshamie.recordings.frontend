@@ -2,7 +2,7 @@
 
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useFetchCalls } from "@/api/calls";
-import { ICall, ICallLogs } from "@/lib/interfaces/call-interface";
+import { ICall, ICallFilters, ICallLogs } from "@/lib/interfaces/call-interface";
 import { CallList } from "./components/call-list";
 import { CallListFilters } from "./components/filters/call-list-filters";
 import { useCallFilters } from "./lib/use-call-filters";
@@ -42,13 +42,12 @@ export default function CallLogPage() {
   });
 
   useEffect(() => {
-    console.log("PAGEE OFFSEEETTT", data)
     if (isSuccess) {
-      const paginationData = {
+      const paginationData: ICallFilters = {
         hasNext: data.data.hasNext,
         hasPrevious: data.data.hasPrevious,
         pageSize: data.data.pageSize,
-        pageOffset: data.data.pageOffset ?? 1,
+        pageOffSet: data.data.pageOffSet,
         totalCount: data.data.totalCount,
         totalPages: data.data.totalPages,
       };

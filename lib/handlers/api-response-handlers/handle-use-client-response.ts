@@ -16,7 +16,7 @@ export const handleApiClientSideError = (
     // If data is undefined, return early
     if (!data) {
         toast({
-            title: "Error 😭",
+            title: "Error",
             description: "No response from the server.",
             variant: "destructive",
             duration: 5000,
@@ -44,7 +44,7 @@ export const handleApiClientSideError = (
         .filter((error): error is string => Boolean(error)) // Filter out undefined
         .forEach((error: string) => {
             toast({
-                title: "Error 😭",
+                title: "Error",
                 description: error || "An unknown error occurred.",
                 variant: "destructive",
                 duration: 5000,

@@ -35,7 +35,7 @@ export interface ICallFilters {
     hasNext?: boolean,
     hasPrevious?: boolean,
     pageSize?: number
-    pageOffset?: number
+    pageOffSet?: number
     totalCount?: number,
     totalPages?: number
 }
@@ -45,7 +45,7 @@ export interface ICallLogs {
     hasPrevious?: boolean,
     items: ICall[] | [],
     pageSize?: number
-    pageOffset?: number
+    pageOffSet?: number
     totalCount?: number,
     totalPages?: number
     streamingUrl?: string,
@@ -63,3 +63,5 @@ export interface ICallAdvanceFilterComponent {
     hasPciCompliance?: boolean,
     hasQualityEvaluation?: boolean,
 }
+
+export type TCallFilterKeys = keyof ICallFilters;

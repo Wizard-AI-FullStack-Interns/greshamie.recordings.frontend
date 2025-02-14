@@ -15,7 +15,7 @@ export interface IActivityResponse {
     hasPrevious?: boolean,
     items: IActivity[] | [],
     pageSize?: number
-    pageOffset?: number
+    pageOffSet?: number
     totalCount?: number,
     totalPages?: number
 }
@@ -25,6 +25,14 @@ export interface IActivityFilters {
     eventType?: TEventType,
     startDate?: string,
     endDate?: string,
+
+    // Pagination
+    hasNext?: boolean,
+    hasPrevious?: boolean,
+    pageSize?: number
+    pageOffSet?: number
+    totalCount?: number,
+    totalPages?: number
 }
 
 export interface IActivityAdvanceFilterComponent {
